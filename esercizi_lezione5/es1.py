@@ -10,7 +10,7 @@ class Studente(Persona):
         super().__init__(nome, cognome)
         self.corsi = corsi
     def saluta(self):
-        Persona.saluta(self)
+        super().saluta(self)
         print("frequento i corsi:", self.corsi)
 
 class Docente(Persona):
@@ -19,7 +19,7 @@ class Docente(Persona):
         self.corsi = corsi
 
     def saluta(self):
-        Persona.saluta(self)
+        super().saluta(self)
         print("Docente dei corsi:",self.corsi)
     
     def insegnamento(self,studente):
