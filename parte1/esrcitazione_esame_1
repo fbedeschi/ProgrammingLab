@@ -1,0 +1,30 @@
+class ExamException(Exception):
+    pass
+
+
+class MovingAverage:
+    def __init__(self, lunghezza_finestra):
+        if not isinstance(lunghezza_finestra, int) or isinstance(lunghezza_finestra, bool) or lunghezza_finestra <= 0:
+            raise ExamException('Errore: lunghezza_finestra deve essere un intero strettamente positivo')
+        self.lunghezza_finestra = lunghezza_finestra
+
+    def compute(self, dati):
+        if not isinstance(dati, list):
+            raise ExamException('Errore: dati deve essere una lista')
+        
+        for elemento in dati:
+            if not isinstance(elemento, (int, float)) or isinstance(elemento, bool):
+                raise ExamException('Errore: tutti gli elementi della lista devono essere numeri')
+        
+        if len(dati) < self.lunghezza_finestra:
+            raise ExamException('Errore: la lista contiene meno elementi della lunghezza della finestra')
+        
+        risultato = []
+        for i in range(len(dati) - self.lunghezza_finestra + 1):
+            finestra = dati[i : i + self.lunghezza_finestra]
+            risultato.append(sum(finestra) / self.lunghezza_finestra)
+        
+        return risultato
+
+
+

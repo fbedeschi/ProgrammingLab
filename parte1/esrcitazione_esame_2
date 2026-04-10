@@ -1,0 +1,26 @@
+class ExamException(Exception):
+    pass
+
+class CSVTimeSeriesFile:
+    def __init__(self,name):
+        self.name=name
+
+    def get_data(self):
+        try:
+            with open(self.name) as f:
+                dati = f.read()
+        except :
+            raise ExamException("impossibile aprire il file")
+        
+        lista_finale = []
+        for i in dati.splitlines():
+            tmp = i.split(",")
+            if len(tmp)<2:
+                continue
+            lista_finale.append([tmp[0],int(tmp[1])])
+        
+        print(dati)
+    
+
+time_serirs_file = CSVTimeSeriesFile("data.csv")
+time_serirs_file.get_data()
